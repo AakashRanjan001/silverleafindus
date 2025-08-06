@@ -4,6 +4,7 @@ import products from "../../essentials/productData.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ChevronDown } from "lucide-react";
+import PaymentButton from '../../components/razorPay';
 
 const ProductDetail = () => {
 	const { productID } = useParams();
@@ -29,13 +30,10 @@ const ProductDetail = () => {
 
 	useEffect(() => {
 		if (product && currentImageIndex !== null) {
-			// If current image is before visible range
 			if (currentImageIndex < startIndex) {
 				setStartIndex(currentImageIndex);
-			}
-			// If current image is after visible range (considering 6 visible items)
-			else if (currentImageIndex >= startIndex + 6) {
-				setStartIndex(currentImageIndex - 5); // Show selected image as last visible
+			} else if (currentImageIndex >= startIndex + 6) {
+				setStartIndex(currentImageIndex - 5);
 			}
 		}
 	}, [currentImageIndex, product]);
@@ -155,9 +153,11 @@ const ProductDetail = () => {
 
 						<p className="text-sm md:text-base lg:text-lg font-saudagar text-gray-500 mt-6">{product.description}</p>
 						
-						<button className="mt-6 bg-[#FED685] w-full hover:cursor-pointer  px-10 py-3 text-[#131313] font-megante capitalize md:px-6 md:py-3 hover:bg-amber-400 transition text-sm md:text-base" >
+						<PaymentButton />
+
+						{/* <button className="mt-6 bg-[#FED685] w-full hover:cursor-pointer  px-10 py-3 text-[#131313] font-megante capitalize md:px-6 md:py-3 hover:bg-amber-400 transition text-sm md:text-base" >
 							buy now
-						</button>
+						</button> */}
 
 						<p className="text-xs md:text-sm text-gray-400 mt-3 text-center font-megante">{product.shipping_info}</p>
 
